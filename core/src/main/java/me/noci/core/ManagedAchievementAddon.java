@@ -2,7 +2,6 @@ package me.noci.core;
 
 import com.google.inject.Singleton;
 import me.noci.core.utils.AchievementStatus;
-import net.labymod.api.Laby;
 import net.labymod.api.addon.LabyAddon;
 import net.labymod.api.client.render.font.ComponentMapper;
 import net.labymod.api.inject.LabyGuice;

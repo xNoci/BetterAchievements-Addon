@@ -1,5 +1,7 @@
 package me.noci.v1_17.mixins;
 
+import java.util.Iterator;
+import java.util.Map;
 import me.noci.core.ManagedAchievementAddon;
 import me.noci.core.ManagedAchievementConfiguration;
 import me.noci.core.utils.AchievementStatus;
@@ -12,8 +14,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
-import java.util.Iterator;
-import java.util.Map;
 
 @Mixin(ClientAdvancements.class)
 public abstract class AdvancementsHandler {
