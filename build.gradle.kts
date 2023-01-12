@@ -36,7 +36,7 @@ plugins {
     id("java-library")
 }
 
-group = "org.example"
+group = "me.noci"
 version = "1.0.0"
 
 plugins.apply("net.labymod.gradle.addon")
@@ -60,10 +60,10 @@ subprojects {
 
 addon {
     addonInfo {
-        namespace("example")
-        displayName("Example Addon")
-        author("Example Author")
-        description("An Example Description!")
+        namespace("managedachievement")
+        displayName("Better Achievements")
+        author("Noci")
+        description("This addon gives your the ability to change the display type for achievements in both single and multiplayer.")
         version(System.getenv().getOrDefault("VERSION", "0.0.0"))
 
         //if you want to add dependencies, go to the build.gradle.kts in the core or api module
