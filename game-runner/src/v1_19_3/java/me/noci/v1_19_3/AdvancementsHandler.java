@@ -1,9 +1,8 @@
-package me.noci.v1_17.mixins;
+package me.noci.v1_19_3;
 
 import me.noci.core.ManagedAchievementAddon;
 import me.noci.core.ManagedAchievementConfiguration;
 import me.noci.core.utils.AchievementStatus;
-import net.labymod.api.inject.LabyGuice;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.client.multiplayer.ClientAdvancements;
 import net.minecraft.network.protocol.game.ClientboundUpdateAdvancementsPacket;
@@ -29,7 +28,7 @@ public abstract class AdvancementsHandler {
                        Iterator it, Map.Entry entry, Advancement advancement) {
 
         if (this.addon == null) {
-            this.addon = LabyGuice.getInstance(ManagedAchievementAddon.class);
+            this.addon = ManagedAchievementAddon.get();
             this.configuration = this.addon.configuration();
         }
 
@@ -37,7 +36,7 @@ public abstract class AdvancementsHandler {
             return;
         }
 
-        AchievementStatus status = addon.configuration().status().get();
+        AchievementStatus status = configuration.status().get();
         boolean hideToast = status == AchievementStatus.CHAT || status == AchievementStatus.HIDDEN;
 
         this.addon.sendAdvancement(status, advancement.getDisplay().getTitle().getString());

@@ -1,15 +1,22 @@
 package me.noci.core;
 
-import com.google.inject.Singleton;
 import me.noci.core.utils.AchievementStatus;
+import net.labymod.api.Laby;
 import net.labymod.api.addon.LabyAddon;
-import net.labymod.api.client.render.font.ComponentMapper;
-import net.labymod.api.inject.LabyGuice;
-import net.labymod.api.models.addon.annotation.AddonListener;
+import net.labymod.api.models.addon.annotation.AddonMain;
 
-@Singleton
-@AddonListener
+@AddonMain
 public class ManagedAchievementAddon extends LabyAddon<ManagedAchievementConfiguration> {
+
+    private static ManagedAchievementAddon instance;
+
+    public ManagedAchievementAddon() {
+        instance = this;
+    }
+
+    public static ManagedAchievementAddon get() {
+        return instance;
+    }
 
     @Override
     protected void enable() {
@@ -28,7 +35,7 @@ public class ManagedAchievementAddon extends LabyAddon<ManagedAchievementConfigu
 
         String message = configuration().message().get();
         message = message.replaceAll("%name%", displayName);
-        message = LabyGuice.getInstance(ComponentMapper.class).translateColorCodes('&', '§', message);
+        message = Laby.references().componentMapper().translateColorCodes('&', '\u00a7', message);
 
         displayMessage(message);
     }
