@@ -1,28 +1,28 @@
 {
-  "managedachievement" : {
-    "settings" : {
-      "name" : "Better Achievements",
-      "enabled" : {
-        "name" : "Enabled"
+  "managedachievement": {
+    "settings": {
+      "name": "Better Achievements",
+      "enabled": {
+        "name": "Enabled"
       },
-      "statusSingleplayer" : {
-        "name" : "Display type"
+      "statusSingleplayer": {
+        "name": "Display type"
       },
-      "statusMultiplayer" : {
-        "name" : "Display type"
+      "statusMultiplayer": {
+        "name": "Display type"
       },
-      "messageSingleplayer" : {
-        "name" : "Chat message"
+      "messageSingleplayer": {
+        "name": "Chat message"
       },
-      "messageMultiplayer" : {
-        "name" : "Chat message"
+      "messageMultiplayer": {
+        "name": "Chat message"
       },
-      "header" : {
-        "singleplayer" : {
-          "name" : "Singleplayer"
+      "header": {
+        "singleplayer": {
+          "name": "Singleplayer"
         },
-        "multiplayer" : {
-          "name" : "Multiplayer"
+        "multiplayer": {
+          "name": "Multiplayer"
         }
       }
     }

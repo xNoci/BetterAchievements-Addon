@@ -11,26 +11,26 @@ import net.labymod.api.models.addon.annotation.AddonListener;
 @AddonListener
 public class ManagedAchievementAddon extends LabyAddon<ManagedAchievementConfiguration> {
 
-  @Override
-  protected void enable() {
-    registerSettingCategory();
-  }
-
-  @Override
-  protected Class<ManagedAchievementConfiguration> configurationClass() {
-    return ManagedAchievementConfiguration.class;
-  }
-
-  public void sendAdvancement(AchievementStatus status, String displayName) {
-    if (status != AchievementStatus.BOTH && status != AchievementStatus.CHAT) {
-      return;
+    @Override
+    protected void enable() {
+        registerSettingCategory();
     }
 
-    String message = configuration().message().get();
-    message = message.replaceAll("%name%", displayName);
-    message = LabyGuice.getInstance(ComponentMapper.class).translateColorCodes('&', '§', message);
+    @Override
+    protected Class<ManagedAchievementConfiguration> configurationClass() {
+        return ManagedAchievementConfiguration.class;
+    }
 
-    displayMessage(message);
-  }
+    public void sendAdvancement(AchievementStatus status, String displayName) {
+        if (status != AchievementStatus.BOTH && status != AchievementStatus.CHAT) {
+            return;
+        }
+
+        String message = configuration().message().get();
+        message = message.replaceAll("%name%", displayName);
+        message = LabyGuice.getInstance(ComponentMapper.class).translateColorCodes('&', '§', message);
+
+        displayMessage(message);
+    }
 
 }

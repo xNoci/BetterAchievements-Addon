@@ -14,28 +14,28 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(GuiAchievement.class)
 public abstract class AdvancementsHandler {
 
-  private ManagedAchievementAddon addon;
-  private ManagedAchievementConfiguration configuration;
+    private ManagedAchievementAddon addon;
+    private ManagedAchievementConfiguration configuration;
 
-  @Inject(method = "displayAchievement", at = @At("HEAD"), cancellable = true)
-  public void displayAchievement(Achievement achievement, CallbackInfo callbackInfo) {
-    if (this.addon == null) {
-      this.addon = LabyGuice.getInstance(ManagedAchievementAddon.class);
-      this.configuration = this.addon.configuration();
+    @Inject(method = "displayAchievement", at = @At("HEAD"), cancellable = true)
+    public void displayAchievement(Achievement achievement, CallbackInfo callbackInfo) {
+        if (this.addon == null) {
+            this.addon = LabyGuice.getInstance(ManagedAchievementAddon.class);
+            this.configuration = this.addon.configuration();
+        }
+
+        if (!configuration.enabled().get()) {
+            return;
+        }
+
+        AchievementStatus status = addon.configuration().status().get();
+        boolean hideToast = status == AchievementStatus.CHAT || status == AchievementStatus.HIDDEN;
+
+        this.addon.sendAdvancement(status, achievement.getStatName().getUnformattedText());
+
+        if (hideToast) {
+            callbackInfo.cancel();
+        }
     }
-
-    if (!configuration.enabled().get()) {
-      return;
-    }
-
-    AchievementStatus status = addon.configuration().status().get();
-    boolean hideToast = status == AchievementStatus.CHAT || status == AchievementStatus.HIDDEN;
-
-    this.addon.sendAdvancement(status, achievement.getStatName().getUnformattedText());
-
-    if (hideToast) {
-      callbackInfo.cancel();
-    }
-  }
-
+    
 }

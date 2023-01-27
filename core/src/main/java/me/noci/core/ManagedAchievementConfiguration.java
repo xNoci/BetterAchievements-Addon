@@ -14,39 +14,40 @@ import net.labymod.api.configuration.settings.annotation.SettingSection;
 @ConfigName("settings")
 public class ManagedAchievementConfiguration extends AddonConfig {
 
-  @SwitchSetting
-  private final ConfigProperty<Boolean> enabled = new ConfigProperty<>(true);
+    @SwitchSetting
+    private final ConfigProperty<Boolean> enabled = new ConfigProperty<>(true);
 
-  @SettingSection(value = "singleplayer")
-  @DropdownSetting
-  private ConfigProperty<AchievementStatus> statusSingleplayer = new ConfigProperty<>(
-      AchievementStatus.DEFAULT);
-  @TextFieldSetting
-  private ConfigProperty<String> messageSingleplayer = new ConfigProperty<>(
-      "&aYou just received a new advancements: &e%name%");
+    @SettingSection(value = "singleplayer")
+    @DropdownSetting
+    private ConfigProperty<AchievementStatus> statusSingleplayer = new ConfigProperty<>(
+            AchievementStatus.DEFAULT);
 
-  @SettingSection(value = "multiplayer")
-  @DropdownSetting
-  private ConfigProperty<AchievementStatus> statusMultiplayer = new ConfigProperty<>(
-      AchievementStatus.HIDDEN);
-  @TextFieldSetting
-  private ConfigProperty<String> messageMultiplayer = new ConfigProperty<>(
-      "&aYou just received a new advancements: &e%name%");
+    @TextFieldSetting
+    private ConfigProperty<String> messageSingleplayer = new ConfigProperty<>(
+            "&aYou just received a new advancements: &e%name%");
 
+    @SettingSection(value = "multiplayer")
+    @DropdownSetting
+    private ConfigProperty<AchievementStatus> statusMultiplayer = new ConfigProperty<>(
+            AchievementStatus.HIDDEN);
 
-  @Override
-  public ConfigProperty<Boolean> enabled() {
-    return enabled;
-  }
+    @TextFieldSetting
+    private ConfigProperty<String> messageMultiplayer = new ConfigProperty<>(
+            "&aYou just received a new advancements: &e%name%");
 
-  public ConfigProperty<AchievementStatus> status() {
-    return Laby.labyAPI().serverController().isConnected() ?
-        statusMultiplayer : statusSingleplayer;
-  }
+    @Override
+    public ConfigProperty<Boolean> enabled() {
+        return enabled;
+    }
 
-  public ConfigProperty<String> message() {
-    return Laby.labyAPI().serverController().isConnected() ?
-        messageMultiplayer : messageSingleplayer;
-  }
+    public ConfigProperty<AchievementStatus> status() {
+        return Laby.labyAPI().serverController().isConnected() ?
+                statusMultiplayer : statusSingleplayer;
+    }
+
+    public ConfigProperty<String> message() {
+        return Laby.labyAPI().serverController().isConnected() ?
+                messageMultiplayer : messageSingleplayer;
+    }
 
 }
