@@ -1,4 +1,4 @@
-package me.noci.v1_17_1;
+package me.noci.v1_17_1.mixins;
 
 import me.noci.core.ManagedAchievementAddon;
 import me.noci.core.ManagedAchievementConfiguration;
@@ -27,9 +27,9 @@ public abstract class AdvancementsHandler {
     public void update(ClientboundUpdateAdvancementsPacket packet, CallbackInfo callbackInfo,
                        Iterator it, Map.Entry entry, Advancement advancement) {
 
-        if (this.addon == null) {
-            this.addon = ManagedAchievementAddon.get();
-            this.configuration = this.addon.configuration();
+        if (addon == null) {
+            addon = ManagedAchievementAddon.get();
+            configuration = addon.configuration();
         }
 
         if (!configuration.enabled().get()) {
@@ -39,7 +39,7 @@ public abstract class AdvancementsHandler {
         AchievementStatus status = configuration.status().get();
         boolean hideToast = status == AchievementStatus.CHAT || status == AchievementStatus.HIDDEN;
 
-        this.addon.sendAdvancement(status, advancement.getDisplay().getTitle().getString());
+        addon.sendAdvancement(status, advancement.getDisplay().getTitle().getString());
 
         if (hideToast) {
             callbackInfo.cancel();

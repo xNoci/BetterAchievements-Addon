@@ -1,32 +1,23 @@
-package me.noci.v1_18_2;
+package me.noci.v1_8_9.mixins;
 
 import me.noci.core.ManagedAchievementAddon;
 import me.noci.core.ManagedAchievementConfiguration;
 import me.noci.core.utils.AchievementStatus;
-import net.minecraft.advancements.Advancement;
-import net.minecraft.client.multiplayer.ClientAdvancements;
-import net.minecraft.network.protocol.game.ClientboundUpdateAdvancementsPacket;
+import net.minecraft.client.gui.achievement.GuiAchievement;
+import net.minecraft.stats.Achievement;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
-import java.util.Iterator;
-import java.util.Map;
-
-@Mixin(ClientAdvancements.class)
+@Mixin(GuiAchievement.class)
 public abstract class AdvancementsHandler {
 
     private ManagedAchievementAddon addon;
     private ManagedAchievementConfiguration configuration;
 
-    @Inject(method = "update", at = @At(value = "INVOKE",
-            target = "Lnet/minecraft/client/gui/components/toasts/ToastComponent;addToast(Lnet/minecraft/client/gui/components/toasts/Toast;)V"),
-            locals = LocalCapture.CAPTURE_FAILHARD, cancellable = true)
-    public void update(ClientboundUpdateAdvancementsPacket packet, CallbackInfo callbackInfo,
-                       Iterator it, Map.Entry entry, Advancement advancement) {
-
+    @Inject(method = "displayAchievement", at = @At("HEAD"), cancellable = true)
+    public void displayAchievement(Achievement achievement, CallbackInfo callbackInfo) {
         if (this.addon == null) {
             this.addon = ManagedAchievementAddon.get();
             this.configuration = this.addon.configuration();
@@ -39,7 +30,7 @@ public abstract class AdvancementsHandler {
         AchievementStatus status = configuration.status().get();
         boolean hideToast = status == AchievementStatus.CHAT || status == AchievementStatus.HIDDEN;
 
-        this.addon.sendAdvancement(status, advancement.getDisplay().getTitle().getString());
+        this.addon.sendAdvancement(status, achievement.getStatName().getUnformattedText());
 
         if (hideToast) {
             callbackInfo.cancel();
