@@ -15,13 +15,13 @@ labyMod {
         namespace = "managedachievement"
         displayName = "Better Achievements"
         author = "Noci"
-        minecraftVersion = "1.8.9,1.17.1<1.19.4"
         description  = "This addon gives you the possibility to change the display type for achievements in single and multiplayer mode. \nPossible display types are: \"DEFAULT, CHAT, BOTH, HIDDEN\""
+        minecraftVersion = "1.8.9<1.19.4"
         version = System.getenv().getOrDefault("VERSION", "0.0.1")
     }
 
     minecraft {
-        registerVersions("1.8.9", "1.17.1", "1.18.2", "1.19.2", "1.19.3", "1.19.4") { version, provider ->
+        registerVersions("1.8.9", "1.12.2", "1.16.5", "1.17.1", "1.18.2", "1.19.2", "1.19.3", "1.19.4") { version, provider ->
             configureRun(provider, version)
         }
 
