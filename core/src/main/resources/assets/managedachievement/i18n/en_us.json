@@ -6,10 +6,22 @@
         "name": "Enabled"
       },
       "statusSingleplayer": {
-        "name": "Display type"
+        "name": "Display type",
+        "entries": {
+          "hidden": "Hidden",
+          "default": "Default",
+          "chat": "Chat",
+          "both": "Both"
+        }
       },
       "statusMultiplayer": {
-        "name": "Display type"
+        "name": "Display type",
+        "entries": {
+          "hidden": "Hidden",
+          "default": "Default",
+          "chat": "Chat",
+          "both": "Both"
+        }
       },
       "messageSingleplayer": {
         "name": "Chat message"
