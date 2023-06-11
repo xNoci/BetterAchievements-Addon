@@ -7,6 +7,7 @@
       },
       "statusSingleplayer": {
         "name": "Display type",
+        "description": "Change how the display advancements.\n\nHidden: Don't show any advancements\nDefault: Only minecraft toast message\nChat: Only show advancements gained in chat\nBoth: Use both 'Chat' and 'Default' as display type",
         "entries": {
           "hidden": "Hidden",
           "default": "Default",
@@ -16,6 +17,7 @@
       },
       "statusMultiplayer": {
         "name": "Display type",
+        "description": "Change how the display advancements.\n\nHidden: Don't show any advancements\nDefault: Only minecraft toast message\nChat: Only show advancements gained in chat\nBoth: Use both 'Chat' and 'Default' as display type",
         "entries": {
           "hidden": "Hidden",
           "default": "Default",
@@ -24,10 +26,12 @@
         }
       },
       "messageSingleplayer": {
-        "name": "Chat message"
+        "name": "Chat message",
+        "description": "The message sent in chat when display type is set to 'Chat' or 'Both'."
       },
       "messageMultiplayer": {
-        "name": "Chat message"
+        "name": "Chat message",
+        "description": "The message sent in chat when display type is set to 'Chat' or 'Both'."
       },
       "header": {
         "singleplayer": {
