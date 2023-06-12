@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "me.noci"
-version = "1.1.2"
+version = "1.1.3"
 
 java.toolchain.languageVersion.set(JavaLanguageVersion.of(17))
 
@@ -28,7 +28,7 @@ labyMod {
             "1.17.1",
             "1.18.2",
             "1.19.2", "1.19.3", "1.19.4",
-            "1.20"
+            "1.20.1"
         ) { version, provider ->
             configureRun(provider, version)
         }

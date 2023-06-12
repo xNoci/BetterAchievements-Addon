@@ -1,4 +1,4 @@
-package me.noci.v1_20.mixins;
+package me.noci.v1_20_1.mixins;
 
 import me.noci.core.ManagedAchievementAddon;
 import me.noci.core.ManagedAchievementConfiguration;
