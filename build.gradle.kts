@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "me.noci"
-version = "1.1.3"
+version = "1.2.0"
 
 java.toolchain.languageVersion.set(JavaLanguageVersion.of(17))
 
