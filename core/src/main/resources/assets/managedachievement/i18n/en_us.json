@@ -27,11 +27,27 @@
       },
       "messageSingleplayer": {
         "name": "Chat message",
-        "description": "The message sent in chat when display type is set to 'Chat' or 'Both'."
+        "description": "The message sent in chat when display type is set to 'Chat' or 'Both'.\n\n-> %%name%% will be replaced with the advancement name."
       },
       "messageMultiplayer": {
         "name": "Chat message",
-        "description": "The message sent in chat when display type is set to 'Chat' or 'Both'."
+        "description": "The message sent in chat when display type is set to 'Chat' or 'Both'.\n\n-> %%name%% will be replaced with the advancement name."
+      },
+      "showDescriptionSingleplayer": {
+        "name": "Show description",
+        "description": "The chat message will display the description of the advancement as a hover message."
+      },
+      "showDescriptionMultiplayer": {
+        "name": "Show description",
+        "description": "The chat message will display the description of the advancement as a hover message."
+      },
+      "descriptionTextSingleplayer": {
+        "name": "Description",
+        "description": "The layout of the description message.\n\n-> %%description%% will be replaced with the advancement description."
+      },
+      "descriptionTextMultiplayer": {
+        "name": "Description",
+        "description": "The layout of the description message.\n\n-> %%description%% will be replaced with the advancement description."
       },
       "header": {
         "singleplayer": {

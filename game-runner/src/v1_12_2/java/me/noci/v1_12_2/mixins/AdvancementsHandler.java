@@ -4,6 +4,7 @@ import me.noci.core.ManagedAchievementAddon;
 import me.noci.core.ManagedAchievementConfiguration;
 import me.noci.core.utils.AchievementStatus;
 import net.minecraft.advancements.Advancement;
+import net.minecraft.advancements.DisplayInfo;
 import net.minecraft.client.multiplayer.ClientAdvancementManager;
 import net.minecraft.network.play.server.SPacketAdvancementInfo;
 import org.spongepowered.asm.mixin.Mixin;
@@ -37,7 +38,9 @@ public class AdvancementsHandler {
         AchievementStatus status = configuration.status().get();
         boolean hideToast =  status == AchievementStatus.CHAT || status == AchievementStatus.HIDDEN;
 
-        addon.sendAdvancement(status, advancement.getDisplay().getTitle().getFormattedText());
+        DisplayInfo display = advancement.getDisplay();
+        if(display == null) return;
+        addon.sendAdvancement(status, display.getTitle().getFormattedText(), display.getDescription().getFormattedText());
 
         if(hideToast) {
             callbackInfo.cancel();

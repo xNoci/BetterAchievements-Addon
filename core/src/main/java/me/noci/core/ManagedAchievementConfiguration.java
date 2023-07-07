@@ -22,18 +22,33 @@ public class ManagedAchievementConfiguration extends AddonConfig {
     private ConfigProperty<AchievementStatus> statusSingleplayer = new ConfigProperty<>(
             AchievementStatus.DEFAULT);
 
+    @SwitchSetting
+    private ConfigProperty<Boolean> showDescriptionSingleplayer = new ConfigProperty<>(true);
+
     @TextFieldSetting
     private ConfigProperty<String> messageSingleplayer = new ConfigProperty<>(
             "&aYou just received a new advancements: &e%name%");
+
+    @TextFieldSetting
+    private ConfigProperty<String> descriptionTextSingleplayer = new ConfigProperty<>(
+            "&7&o(&e&o%description%&7&o)");
 
     @SettingSection(value = "multiplayer")
     @DropdownSetting
     private ConfigProperty<AchievementStatus> statusMultiplayer = new ConfigProperty<>(
             AchievementStatus.HIDDEN);
 
+    @SwitchSetting
+    private ConfigProperty<Boolean> showDescriptionMultiplayer = new ConfigProperty<>(true);
+
     @TextFieldSetting
     private ConfigProperty<String> messageMultiplayer = new ConfigProperty<>(
             "&aYou just received a new advancements: &e%name%");
+
+    @TextFieldSetting
+    private ConfigProperty<String> descriptionTextMultiplayer = new ConfigProperty<>(
+            "&7&o(&e&o%description%&7&o)");
+
 
     @Override
     public ConfigProperty<Boolean> enabled() {
@@ -45,9 +60,19 @@ public class ManagedAchievementConfiguration extends AddonConfig {
                 statusMultiplayer : statusSingleplayer;
     }
 
+    public ConfigProperty<Boolean> showDescription() {
+        return Laby.labyAPI().serverController().isConnected() ?
+                showDescriptionMultiplayer : showDescriptionSingleplayer;
+    }
+
     public ConfigProperty<String> message() {
         return Laby.labyAPI().serverController().isConnected() ?
                 messageMultiplayer : messageSingleplayer;
+    }
+
+    public ConfigProperty<String> description() {
+        return Laby.labyAPI().serverController().isConnected() ?
+                descriptionTextMultiplayer : descriptionTextSingleplayer;
     }
 
 }

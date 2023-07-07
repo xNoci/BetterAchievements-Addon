@@ -30,7 +30,7 @@ public abstract class AdvancementsHandler {
         AchievementStatus status = configuration.status().get();
         boolean hideToast = status == AchievementStatus.CHAT || status == AchievementStatus.HIDDEN;
 
-        this.addon.sendAdvancement(status, achievement.getStatName().getUnformattedText());
+        this.addon.sendAdvancement(status, achievement.getStatName().getUnformattedText(), achievement.getDescription());
 
         if (hideToast) {
             callbackInfo.cancel();
