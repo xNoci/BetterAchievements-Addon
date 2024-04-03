@@ -1,4 +1,4 @@
-package me.noci.core.utils;
+package me.noci.core;
 
 public enum AchievementStatus {
 

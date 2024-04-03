@@ -1,8 +1,8 @@
 package me.noci.v1_18_2.mixins;
 
-import me.noci.core.ManagedAchievementAddon;
-import me.noci.core.ManagedAchievementConfiguration;
-import me.noci.core.utils.AchievementStatus;
+import me.noci.core.AchievementAddon;
+import me.noci.core.event.AdvancementReceivedEvent;
+import net.labymod.api.Laby;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.DisplayInfo;
 import net.minecraft.client.multiplayer.ClientAdvancements;
@@ -19,32 +19,27 @@ import java.util.Map;
 @Mixin(ClientAdvancements.class)
 public abstract class AdvancementsHandler {
 
-    private ManagedAchievementAddon addon;
-    private ManagedAchievementConfiguration configuration;
+    @Inject(
+            method = "update",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/client/gui/components/toasts/ToastComponent;addToast(Lnet/minecraft/client/gui/components/toasts/Toast;)V"
+            ),
+            locals = LocalCapture.CAPTURE_FAILHARD,
+            cancellable = true
+    )
+    public void update(ClientboundUpdateAdvancementsPacket packet, CallbackInfo callbackInfo, Iterator it, Map.Entry entry, Advancement advancement) {
 
-    @Inject(method = "update", at = @At(value = "INVOKE",
-            target = "Lnet/minecraft/client/gui/components/toasts/ToastComponent;addToast(Lnet/minecraft/client/gui/components/toasts/Toast;)V"),
-            locals = LocalCapture.CAPTURE_FAILHARD, cancellable = true)
-    public void update(ClientboundUpdateAdvancementsPacket packet, CallbackInfo callbackInfo,
-                       Iterator it, Map.Entry entry, Advancement advancement) {
-
-        if (addon == null) {
-            addon = ManagedAchievementAddon.get();
-            configuration = addon.configuration();
-        }
-
-        if (!configuration.enabled().get()) {
+        if (!AchievementAddon.enabled()) {
             return;
         }
 
-        AchievementStatus status = configuration.status().get();
-        boolean hideToast = status == AchievementStatus.CHAT || status == AchievementStatus.HIDDEN;
-
         DisplayInfo display = advancement.getDisplay();
-        if(display == null) return;
-        addon.sendAdvancement(status, display.getTitle().getString(), display.getDescription().getString());
+        if (display == null) return;
 
-        if (hideToast) {
+        AdvancementReceivedEvent event = Laby.fireEvent(new AdvancementReceivedEvent(display.getTitle().getString(), display.getDescription().getString()));
+
+        if (event.hideToast()) {
             callbackInfo.cancel();
         }
     }

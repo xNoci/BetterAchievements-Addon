@@ -1,8 +1,8 @@
 package me.noci.v1_12_2.mixins;
 
-import me.noci.core.ManagedAchievementAddon;
-import me.noci.core.ManagedAchievementConfiguration;
-import me.noci.core.utils.AchievementStatus;
+import me.noci.core.AchievementAddon;
+import me.noci.core.event.AdvancementReceivedEvent;
+import net.labymod.api.Laby;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.DisplayInfo;
 import net.minecraft.client.multiplayer.ClientAdvancementManager;
@@ -19,30 +19,26 @@ import java.util.Map;
 @Mixin(ClientAdvancementManager.class)
 public class AdvancementsHandler {
 
-    private ManagedAchievementAddon addon;
-    private ManagedAchievementConfiguration configuration;
-
-    @Inject(method = "read", at = @At(value = "INVOKE",
-            target = "Lnet/minecraft/client/gui/toasts/GuiToast;add(Lnet/minecraft/client/gui/toasts/IToast;)V"),
-            locals = LocalCapture.CAPTURE_FAILHARD, cancellable = true)
+    @Inject(
+            method = "read",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/client/gui/toasts/GuiToast;add(Lnet/minecraft/client/gui/toasts/IToast;)V"
+            ),
+            locals = LocalCapture.CAPTURE_FAILHARD,
+            cancellable = true
+    )
     public void read(SPacketAdvancementInfo packetAdvancementInfo, CallbackInfo callbackInfo, Iterator it, Map.Entry entry, Advancement advancement) {
-        if(addon == null) {
-            addon = ManagedAchievementAddon.get();
-            configuration = addon.configuration();
-        }
-
-        if(!configuration.enabled().get()) {
+        if (!AchievementAddon.enabled()) {
             return;
         }
 
-        AchievementStatus status = configuration.status().get();
-        boolean hideToast =  status == AchievementStatus.CHAT || status == AchievementStatus.HIDDEN;
-
         DisplayInfo display = advancement.getDisplay();
-        if(display == null) return;
-        addon.sendAdvancement(status, display.getTitle().getFormattedText(), display.getDescription().getFormattedText());
+        if (display == null) return;
 
-        if(hideToast) {
+        AdvancementReceivedEvent event = Laby.fireEvent(new AdvancementReceivedEvent(display.getTitle().getFormattedText(), display.getDescription().getFormattedText()));
+
+        if (event.hideToast()) {
             callbackInfo.cancel();
         }
     }
