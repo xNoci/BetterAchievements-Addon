@@ -4,12 +4,13 @@ import lombok.Getter;
 import lombok.Setter;
 import net.labymod.api.event.Event;
 
+@Getter
 public class AdvancementReceivedEvent implements Event {
 
-    @Getter private final String title;
-    @Getter private final String description;
+    private final String title;
+    private final String description;
 
-    @Getter @Setter private boolean hideToast = false;
+    @Setter private boolean hideToast = false;
 
     public AdvancementReceivedEvent(String title, String description) {
         this.title = title;
