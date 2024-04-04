@@ -7,7 +7,7 @@ plugins {
 group = "me.noci"
 version = "1.2.3"
 
-java.toolchain.languageVersion.set(JavaLanguageVersion.of(17))
+java.toolchain.languageVersion.set(JavaLanguageVersion.of(21))
 
 labyMod {
     defaultPackageName = "me.noci"
