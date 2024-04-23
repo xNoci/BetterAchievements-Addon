@@ -1,7 +1,6 @@
 package me.noci.core;
 
 import me.noci.core.listener.AdvancementReceivedListener;
-import net.labymod.api.Laby;
 import net.labymod.api.addon.LabyAddon;
 import net.labymod.api.models.addon.annotation.AddonMain;
 
@@ -21,7 +20,7 @@ public class AchievementAddon extends LabyAddon<AchievementConfiguration> {
     @Override
     protected void enable() {
         registerSettingCategory();
-        Laby.references().eventBus().registerListener(new AdvancementReceivedListener(configuration()));
+        registerListener(new AdvancementReceivedListener(configuration()));
     }
 
     @Override
