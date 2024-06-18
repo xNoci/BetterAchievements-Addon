@@ -27,7 +27,7 @@ public class AdvancementReceivedListener {
 
         String message = config.message();
         message = message.replaceAll("%name%", event.title());
-        message = Laby.references().componentMapper().translateColorCodes('&', '\u00a7', message);
+        message = Laby.references().componentMapper().translateColorCodes(message);
 
         Component component = Component.text(message);
 

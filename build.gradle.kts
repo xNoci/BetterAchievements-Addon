@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "me.noci"
-version = "1.3.1"
+version = "1.3.2"
 
 labyMod {
     defaultPackageName = "me.noci"
@@ -27,6 +27,7 @@ labyMod {
             "1.18.2",
             "1.19.2", "1.19.3", "1.19.4",
             "1.20.1", "1.20.2", "1.20.4", "1.20.5", "1.20.6",
+            "1.21"
         ) { version, provider ->
             configureRun(provider, version)
         }
