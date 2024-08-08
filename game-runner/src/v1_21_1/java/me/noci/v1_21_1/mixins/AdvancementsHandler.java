@@ -1,4 +1,4 @@
-package me.noci.v1_21_1_rc1.mixins;
+package me.noci.v1_21_1.mixins;
 
 import me.noci.core.AchievementAddon;
 import me.noci.core.event.AdvancementReceivedEvent;
