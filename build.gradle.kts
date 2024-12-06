@@ -6,7 +6,7 @@ plugins {
 val versions = providers.gradleProperty("net.labymod.minecraft-versions").get().split(";")
 
 group = "me.noci"
-version = providers.environmentVariable("VERSION").getOrElse("1.3.4")
+version = providers.environmentVariable("VERSION").getOrElse("1.3.5")
 
 labyMod {
     defaultPackageName = "me.noci"
@@ -28,7 +28,7 @@ labyMod {
         displayName = "Better Achievements"
         author = "Noci"
         description = "This addon gives you the possibility to change the display type for achievements in single and multiplayer mode. \nPossible display types are: \"DEFAULT, CHAT, BOTH, HIDDEN\""
-        minecraftVersion = "1.8.9<1.21.3"
+        minecraftVersion = "1.8.9<1.21.4"
         version = rootProject.version.toString()
     }
 }
